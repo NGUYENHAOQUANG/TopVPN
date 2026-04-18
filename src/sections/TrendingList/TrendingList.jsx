@@ -187,10 +187,10 @@ const TrendingList = () => {
 
         <div className="flex flex-col gap-6">
           {vpns.map((vpn, index) => (
-            <VpnCard 
-              key={vpn.brand} 
-              index={index} 
-              {...vpn} 
+            <VpnCard
+              key={vpn.brand}
+              index={index}
+              {...vpn}
               onReadReview={handleReadReview}
             />
           ))}
@@ -198,11 +198,9 @@ const TrendingList = () => {
       </div>
 
       {/* Detail Modal */}
-      <AnimatePresence 
-        onExitComplete={() => setSelectedVpnName(null)}
-      >
+      <AnimatePresence onExitComplete={() => setSelectedVpnName(null)}>
         {isModalOpen && selectedVpnData && (
-          <VpnDetailModal 
+          <VpnDetailModal
             key="vpn-modal"
             onClose={closeModal}
             vpn={selectedVpnData}

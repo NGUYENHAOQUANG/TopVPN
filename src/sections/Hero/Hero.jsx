@@ -16,16 +16,27 @@ import slide7 from "../../assets/Surfshark/slide/image1.png";
 import slide8 from "../../assets/TunnelBear/slide/image1.png";
 import slide9 from "../../assets/Windscribe/slide/image1.png";
 
+// Import icons
+import icon1 from "../../assets/ExpressVpn/expressVPNIcon.png";
+import icon2 from "../../assets/Hide.me/Hide.meicon.png";
+import icon3 from "../../assets/NordVpn/NordIcon.png";
+import icon4 from "../../assets/Private Internet Access/Private_Internet_Accessicon.png";
+import icon5 from "../../assets/PrivateVPN/PrivateVPNicon.png";
+import icon6 from "../../assets/Proton VPN/Proton VPN.png";
+import icon7 from "../../assets/Surfshark/SurfsharkIcon.png";
+import icon8 from "../../assets/TunnelBear/TunnelBearVNPicon.png";
+import icon9 from "../../assets/Windscribe/Windscribe.png";
+
 const slides = [
-  slide1,
-  slide2,
-  slide3,
-  slide4,
-  slide5,
-  slide6,
-  slide7,
-  slide8,
-  slide9,
+  { img: slide1, icon: icon1, name: "ExpressVPN" },
+  { img: slide2, icon: icon2, name: "Hide.me" },
+  { img: slide3, icon: icon3, name: "NordVPN" },
+  { img: slide4, icon: icon4, name: "PIA VPN" },
+  { img: slide5, icon: icon5, name: "PrivateVPN" },
+  { img: slide6, icon: icon6, name: "Proton VPN" },
+  { img: slide7, icon: icon7, name: "Surfshark" },
+  { img: slide8, icon: icon8, name: "TunnelBear" },
+  { img: slide9, icon: icon9, name: "Windscribe" },
 ];
 
 gsap.registerPlugin(ScrollTrigger);
@@ -287,10 +298,64 @@ const Hero = () => {
                 className="max-w-full h-auto drop-shadow-2xl object-contain relative rounded-xl"
               />
 
+              {/* Vibrant VPN Server Nodes - All Brands */}
+              {[
+                { top: "42%", left: "45%", icon: icon1, color: "rgba(235, 0, 40, 0.6)", name: "ExpressVPN" },
+                { top: "58%", left: "48%", icon: icon2, color: "rgba(0, 161, 222, 0.6)", name: "Hide.me" },
+                { top: "52%", left: "62%", icon: icon3, color: "rgba(58, 106, 194, 0.6)", name: "NordVPN" },
+                { top: "38%", left: "55%", icon: icon4, color: "rgba(0, 175, 80, 0.6)", name: "PIA" },
+                { top: "45%", left: "70%", icon: icon5, color: "rgba(107, 34, 131, 0.6)", name: "PrivateVPN" },
+                { top: "65%", left: "52%", icon: icon6, color: "rgba(109, 192, 103, 0.6)", name: "ProtonVPN" },
+                { top: "35%", left: "68%", icon: icon7, color: "rgba(0, 213, 255, 0.6)", name: "Surfshark" },
+                { top: "48%", left: "40%", icon: icon8, color: "rgba(152, 94, 43, 0.6)", name: "TunnelBear" },
+                { top: "55%", left: "35%", icon: icon9, color: "rgba(0, 107, 255, 0.6)", name: "Windscribe" },
+              ].map((pin, i) => (
+                <div 
+                  key={i}
+                  className="absolute z-30 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 hover:scale-125"
+                  style={{ top: pin.top, left: pin.left }}
+                  ref={(el) => (floatingCardsRef.current[i + 2] = el)}
+                >
+                  <div className="relative flex flex-col items-center">
+                    {/* Radiating Light Layers */}
+                    <div 
+                      className="absolute inset-0 rounded-full animate-ping opacity-20"
+                      style={{ backgroundColor: pin.color, animationDuration: '3s' }}
+                    ></div>
+                    <div 
+                      className="absolute inset-0 rounded-full animate-pulse opacity-30 blur-md"
+                      style={{ backgroundColor: pin.color, transform: 'scale(1.5)' }}
+                    ></div>
+                    
+                    <img 
+                      src={pin.icon} 
+                      alt={pin.name} 
+                      className="w-10 h-10 md:w-12 md:h-12 object-contain relative z-10"
+                      style={{ 
+                        filter: `drop-shadow(0 0 15px ${pin.color})` 
+                      }}
+                    />
+                    
+                    {/* Bottom Status Dot with spreading light */}
+                    <div className="absolute -bottom-2 flex items-center justify-center">
+                      <div 
+                        className="w-2 h-2 rounded-full relative z-20"
+                        style={{ backgroundColor: pin.color }}
+                      >
+                        <div 
+                          className="absolute inset-0 rounded-full animate-ping opacity-60"
+                          style={{ backgroundColor: pin.color }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
               {/* Floating feature cards */}
               <div
                 ref={(el) => (floatingCardsRef.current[0] = el)}
-                className="absolute -left-4 md:-left-12 top-1/4 bg-white p-4 rounded-xl shadow-xl border border-gray-100 flex items-center gap-3 z-20"
+                className="absolute -left-6 md:-left-12 bottom-[15%] bg-white/95 p-3 md:p-4 rounded-2xl shadow-2xl border border-white flex items-center gap-3 z-40 scale-90 md:scale-100"
               >
                 <div className="bg-primary/10 p-2 rounded-lg text-primary">
                   <Lock size={20} />
@@ -305,7 +370,7 @@ const Hero = () => {
 
               <div
                 ref={(el) => (floatingCardsRef.current[1] = el)}
-                className="absolute -right-4 md:-right-8 bottom-1/4 bg-white p-4 rounded-xl shadow-xl border border-gray-100 flex items-center gap-3 z-20"
+                className="absolute -right-6 md:-right-10 top-[8%] bg-white/95 p-3 md:p-4 rounded-2xl shadow-2xl border border-white flex items-center gap-3 z-40 scale-90 md:scale-100"
               >
                 <div className="bg-accent-green/10 p-2 rounded-lg text-accent-green">
                   <Globe size={20} />
@@ -343,14 +408,14 @@ const Hero = () => {
                 ref={scrollWrapperRef}
                 className="w-full h-full overflow-y-auto overflow-x-hidden px-1 md:px-4 pb-[40vh] pt-32 space-y-12 snap-y snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none'] scroll-smooth"
               >
-                {slides.map((imgSrc, idx) => {
+                {slides.map((slide, idx) => {
                   const isActive = idx === activeIndex;
                   return (
                     <div
                       key={idx}
                       ref={(el) => (slideRefs.current[idx] = el)}
                       data-index={idx}
-                      className={`w-full rounded-[1.5rem] overflow-hidden transition-all duration-700 ease-out snap-center transform origin-center border
+                      className={`w-full rounded-[1.5rem] overflow-hidden transition-all duration-700 ease-out snap-center transform origin-center border relative
                         ${
                           isActive
                             ? "scale-100 opacity-100 blur-none shadow-[0_20px_50px_rgba(36,65,217,0.15)] border-white/80 bg-white"
@@ -358,10 +423,24 @@ const Hero = () => {
                         }
                       `}
                     >
+                      {/* VPN Brand Logo Overlay - Uniform Rectangular Container */}
+                      <div
+                        className={`absolute top-4 left-4 z-30 transition-all duration-700 delay-300 flex items-center justify-center rounded-xl backdrop-blur-md bg-white/90 border border-white/50 shadow-xl transform w-[120px] h-[48px] md:w-[180px] md:h-[64px]
+                        ${isActive ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-90 -translate-y-4"}`}
+                      >
+                        <div className="w-full h-full flex items-center justify-center p-2 md:p-3">
+                          <img
+                            src={slide.icon}
+                            alt={slide.name}
+                            className="max-w-full max-h-full object-contain filter drop-shadow-sm transition-transform duration-500 hover:scale-105"
+                          />
+                        </div>
+                      </div>
+
                       <div className="relative">
                         <img
-                          src={imgSrc}
-                          alt={`Slide display ${idx + 1}`}
+                          src={slide.img}
+                          alt={`${slide.name} display`}
                           className={`w-full h-auto object-cover rounded-[1.5rem] transition-transform duration-700 ${isActive ? "scale-100" : "scale-[1.05]"}`}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-300 pointer-events-none rounded-[1.5rem]"></div>
