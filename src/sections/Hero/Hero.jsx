@@ -98,25 +98,28 @@ const Hero = () => {
 
         // Floating Animations
         floatingCardsRef.current.forEach((card, index) => {
+          if (!card) return;
           gsap.fromTo(
             card,
-            { opacity: 0, y: 20 },
+            { opacity: 0, y: 20, scale: 0.8 },
             {
               opacity: 1,
               y: 0,
-              duration: 0.6,
-              delay: 0.6 + index * 0.2,
-              ease: "back.out(1.5)",
+              scale: 1,
+              duration: 0.8,
+              delay: 0.8 + index * 0.1, // Faster stagger for many icons
+              ease: "back.out(1.7)",
             },
           );
           gsap.to(card, {
-            y: index % 2 === 0 ? "-=12" : "+=12",
+            y: index % 2 === 0 ? "-=10" : "+=10",
+            x: index % 3 === 0 ? "-=5" : "+=5",
             rotation: index % 2 === 0 ? 1 : -1,
-            duration: 3 + index,
+            duration: 3 + Math.random() * 2,
             yoyo: true,
             repeat: -1,
             ease: "sine.inOut",
-            delay: 1.2,
+            delay: 1.5,
           });
         });
 
@@ -300,49 +303,108 @@ const Hero = () => {
 
               {/* Vibrant VPN Server Nodes - All Brands */}
               {[
-                { top: "42%", left: "45%", icon: icon1, color: "rgba(235, 0, 40, 0.6)", name: "ExpressVPN" },
-                { top: "58%", left: "48%", icon: icon2, color: "rgba(0, 161, 222, 0.6)", name: "Hide.me" },
-                { top: "52%", left: "62%", icon: icon3, color: "rgba(58, 106, 194, 0.6)", name: "NordVPN" },
-                { top: "38%", left: "55%", icon: icon4, color: "rgba(0, 175, 80, 0.6)", name: "PIA" },
-                { top: "45%", left: "70%", icon: icon5, color: "rgba(107, 34, 131, 0.6)", name: "PrivateVPN" },
-                { top: "65%", left: "52%", icon: icon6, color: "rgba(109, 192, 103, 0.6)", name: "ProtonVPN" },
-                { top: "35%", left: "68%", icon: icon7, color: "rgba(0, 213, 255, 0.6)", name: "Surfshark" },
-                { top: "48%", left: "40%", icon: icon8, color: "rgba(152, 94, 43, 0.6)", name: "TunnelBear" },
-                { top: "55%", left: "35%", icon: icon9, color: "rgba(0, 107, 255, 0.6)", name: "Windscribe" },
+                {
+                  top: "42%",
+                  left: "45%",
+                  icon: icon1,
+                  color: "rgba(235, 0, 40, 0.6)",
+                  name: "ExpressVPN",
+                },
+                {
+                  top: "58%",
+                  left: "48%",
+                  icon: icon2,
+                  color: "rgba(0, 161, 222, 0.6)",
+                  name: "Hide.me",
+                },
+                {
+                  top: "52%",
+                  left: "62%",
+                  icon: icon3,
+                  color: "rgba(58, 106, 194, 0.6)",
+                  name: "NordVPN",
+                },
+                {
+                  top: "38%",
+                  left: "55%",
+                  icon: icon4,
+                  color: "rgba(0, 175, 80, 0.6)",
+                  name: "PIA",
+                },
+                {
+                  top: "45%",
+                  left: "70%",
+                  icon: icon5,
+                  color: "rgba(107, 34, 131, 0.6)",
+                  name: "PrivateVPN",
+                },
+                {
+                  top: "65%",
+                  left: "52%",
+                  icon: icon6,
+                  color: "rgba(109, 192, 103, 0.6)",
+                  name: "ProtonVPN",
+                },
+                {
+                  top: "35%",
+                  left: "68%",
+                  icon: icon7,
+                  color: "rgba(0, 213, 255, 0.6)",
+                  name: "Surfshark",
+                },
+                {
+                  top: "48%",
+                  left: "40%",
+                  icon: icon8,
+                  color: "rgba(152, 94, 43, 0.6)",
+                  name: "TunnelBear",
+                },
+                {
+                  top: "55%",
+                  left: "35%",
+                  icon: icon9,
+                  color: "rgba(0, 107, 255, 0.6)",
+                  name: "Windscribe",
+                },
               ].map((pin, i) => (
-                <div 
+                <div
                   key={i}
-                  className="absolute z-30 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 hover:scale-125"
+                  className="absolute z-30 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 hover:scale-125 opacity-0"
                   style={{ top: pin.top, left: pin.left }}
                   ref={(el) => (floatingCardsRef.current[i + 2] = el)}
                 >
                   <div className="relative flex flex-col items-center">
                     {/* Radiating Light Layers */}
-                    <div 
+                    <div
                       className="absolute inset-0 rounded-full animate-ping opacity-20"
-                      style={{ backgroundColor: pin.color, animationDuration: '3s' }}
+                      style={{
+                        backgroundColor: pin.color,
+                        animationDuration: "3s",
+                      }}
                     ></div>
-                    <div 
+                    <div
                       className="absolute inset-0 rounded-full animate-pulse opacity-30 blur-md"
-                      style={{ backgroundColor: pin.color, transform: 'scale(1.5)' }}
+                      style={{
+                        backgroundColor: pin.color,
+                        transform: "scale(1.5)",
+                      }}
                     ></div>
-                    
-                    <img 
-                      src={pin.icon} 
-                      alt={pin.name} 
+
+                    <img
+                      src={pin.icon}
+                      alt={pin.name}
                       className="w-10 h-10 md:w-12 md:h-12 object-contain relative z-10"
-                      style={{ 
-                        filter: `drop-shadow(0 0 15px ${pin.color})` 
+                      style={{
+                        filter: `drop-shadow(0 0 15px ${pin.color})`,
                       }}
                     />
-                    
-                    {/* Bottom Status Dot with spreading light */}
+
                     <div className="absolute -bottom-2 flex items-center justify-center">
-                      <div 
+                      <div
                         className="w-2 h-2 rounded-full relative z-20"
                         style={{ backgroundColor: pin.color }}
                       >
-                        <div 
+                        <div
                           className="absolute inset-0 rounded-full animate-ping opacity-60"
                           style={{ backgroundColor: pin.color }}
                         ></div>
@@ -355,7 +417,7 @@ const Hero = () => {
               {/* Floating feature cards */}
               <div
                 ref={(el) => (floatingCardsRef.current[0] = el)}
-                className="absolute -left-6 md:-left-12 bottom-[15%] bg-white/95 p-3 md:p-4 rounded-2xl shadow-2xl border border-white flex items-center gap-3 z-40 scale-90 md:scale-100"
+                className="absolute -left-6 md:-left-12 top-[10%] bg-white/95 p-3 md:p-4 rounded-2xl shadow-2xl border border-white flex items-center gap-3 z-40 scale-90 md:scale-100 opacity-0"
               >
                 <div className="bg-primary/10 p-2 rounded-lg text-primary">
                   <Lock size={20} />
@@ -370,7 +432,7 @@ const Hero = () => {
 
               <div
                 ref={(el) => (floatingCardsRef.current[1] = el)}
-                className="absolute -right-6 md:-right-10 top-[8%] bg-white/95 p-3 md:p-4 rounded-2xl shadow-2xl border border-white flex items-center gap-3 z-40 scale-90 md:scale-100"
+                className="absolute -right-6 md:-right-10 bottom-[20%] bg-white/95 p-3 md:p-4 rounded-2xl shadow-2xl border border-white flex items-center gap-3 z-40 scale-90 md:scale-100 opacity-0"
               >
                 <div className="bg-accent-green/10 p-2 rounded-lg text-accent-green">
                   <Globe size={20} />
